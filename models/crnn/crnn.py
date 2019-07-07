@@ -3,7 +3,7 @@ import torch.nn as nn
 class BidirectionalLSTM(nn.Module):
     # in hidden out
     def __init__(self, _in, hidden, out):
-        super(BidirectionalLSTM, self).__init__
+        super(BidirectionalLSTM, self).__init__()
 
         self.rnn = nn.LSTM(_in, hidden, bidirectional=True)
         self.embedding = nn.Linear(hidden * 2, out)
@@ -50,7 +50,7 @@ class CRNN(nn.Module):
                            nn.Conv2d(nIn, nOut, ks[i], ss[i], ps[i]))
             if batchNormalization:
                 cnn.add_module('batchnorm{0}'.format(i), nn.BatchNorm2d(nOut))
-            if leakyRelu:
+            if leakyReLU:
                 cnn.add_module('relu{0}'.format(i),
                                nn.LeakyReLU(0.2, inplace=True))
             else:
