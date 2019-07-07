@@ -66,9 +66,9 @@ class CraftReader():
 
 def main():
 
-    crr =  CraftReader('image')
-    print(crr.net)
-
+    crr =  CraftReader('data/test.png')
+    boxes = crr.boxes_detect()
+    print(boxes)
 
 if __name__ == "__main__":
     main()
