@@ -1,19 +1,12 @@
 import torch.nn as nn 
 
-
 class BidirectionalLSTM(nn.Module):
-
     # in hidden out
-
-    def __init__(self, in, hidden, out):
+    def __init__(self, _in, hidden, out):
         super(BidirectionalLSTM, self).__init__
 
-
-
-        self.rnn = nn.LSTM(in, hidden, bidirectional=True)
+        self.rnn = nn.LSTM(_in, hidden, bidirectional=True)
         self.embedding = nn.Linear(hidden * 2, out)
-
-
 
     # Forward pass
 
@@ -43,14 +36,7 @@ class CRNN(nn.Module):
 
 
         super(CRNN, self).__init__()
-        assert imgh % 16 == 0 " Assumption that image height must be an multiple of 16"
-
-        #FIXME
-
-
-
-
-		ks = [3, 3, 3, 3, 3, 3, 2]
+        ks = [3, 3, 3, 3, 3, 3, 2]
         ps = [1, 1, 1, 1, 1, 1, 0]
         ss = [1, 1, 1, 1, 1, 1, 1]
         nm = [64, 128, 256, 256, 512, 512, 512]

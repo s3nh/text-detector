@@ -1,12 +1,12 @@
 import torch
 from torch.autograd import Variable
 
-import utils 
-import preprocess
+import models.crnn.utils  as utils
+import models.crnn.preprocess as preprocess
 from PIL import Image
 
 
-import models.crnn as rnn
+import models.crnn.crnn as crnn
 
 
 class CRNNReader():
