@@ -3,12 +3,8 @@ from skimage import io
 import cv2 
 
 
-
-
 class ImageConvert():
-
     def __init__(self, img_array, square_size = 1280, interpolation, mag_ratio=1):
-
         self.img_array = img_array
         print("Shape of processed file {}".format(len(self.img_array)))
         self.mean = (0.485, 0.486, 0.406)
@@ -16,19 +12,15 @@ class ImageConvert():
         self.square_size = square_size
         self.interpolation = interpolation
         self.mag_ratio = mag_ratio
-        print("Wartosc srednia \n {} \n variance {} \n".format(self.mean, self.variance))
 
-
-   def normalizeMeanVariance(self):
+    def normalizeMeanVariance(self):
         self.image_array -= np.array([self.mean[0]  * 255.0, self.mean[1] * 255.0, self.mean[2] * 255.0], dtype = np.float32)
         self.image_array /= np.array([variance[0] * 255.0, variance[1] * 255.0, variance[2] * 255.0], dtype = np.float32)
         return self.image_array
 
     def resize_aspect_ratio(self):
-
         # Get image params
         heigt, width, channel = self.image_array.shape
-        #
         target_size  = self.mag_ratio * max(height, width)
 
         if target_size > self.square_size:
@@ -37,8 +29,6 @@ class ImageConvert():
         ratio = target_size / max(height, width)
         target_h, target_w = int(height * ratio), int(width * ratio)
         proc = cv2.resize(self.img_array, (target_w, target_h), interpolation = interpolation)
-
-
 
         # Canvas
 
@@ -52,22 +42,12 @@ class ImageConvert():
         resized[0:target_h, 0:target_w, :] = proc
         target_h, target_w = target_h32, target_w32
 
-
         size_heatmap = (int(target_w/2), int(target_h/2))
-
         return resized, ratio, size_heatmap
-
 
     def cvt2HeatmapImg(img):
         img = (np.clip(img, 0, 1) * 255).astype(np.uint8)
         img = cv2.applyColorMap(img, cv2.COLORMAP_JET)
         return img
         
-def main():
 
-    pass
-
-
-if __name__ == "__main__":
-
-    main()
