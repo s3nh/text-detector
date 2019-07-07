@@ -1,10 +1,10 @@
-import nump as np 
+import numpy as np 
 from skimage import io 
 import cv2 
 
 
 class ImageConvert():
-    def __init__(self, img_array, square_size = 1280, interpolation, mag_ratio=1):
+    def __init__(self, img_array, interpolation =cv2.INTER_LINEAR ,  square_size = 1280,  mag_ratio=1):
         self.img_array = img_array
         print("Shape of processed file {}".format(len(self.img_array)))
         self.mean = (0.485, 0.486, 0.406)
@@ -19,7 +19,6 @@ class ImageConvert():
         return self.image_array
 
     def resize_aspect_ratio(self):
-        # Get image params
         heigt, width, channel = self.image_array.shape
         target_size  = self.mag_ratio * max(height, width)
 

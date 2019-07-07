@@ -17,14 +17,14 @@ import json
 import zipfile
 from collections import OrderedDict
 
-from model.craft.craft import CRAFT
+from text_reco.models.craft.craft import CRAFT
 
 class CraftReader():
     def __init__(self, image):
         self.image = image
         self.model_path = 'text_reco/models/craft/pretrain/craft_mlt_25k.pth'
         self.net = CRAFT()
-        self.net.load_state_dict(self.copyStateDict(self.model_path))
+        self.net.load_state_dict(self.copyStateDict(torch.load(self.model_path)))
         self.net.eval()
 
     @staticmethod
@@ -68,3 +68,7 @@ def main():
 
     crr =  CraftReader('image')
     print(crr.net)
+
+
+if __name__ == "__main__":
+    main()

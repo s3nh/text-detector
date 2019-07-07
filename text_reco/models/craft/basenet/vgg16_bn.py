@@ -36,7 +36,7 @@ class vgg16_bn(torch.nn.Module):
         super(vgg16_bn, self).__init__()
         model_urls['vgg16_bn'] = model_urls['vgg16_bn'].replace('https://', 'http://')
 
-        vgg_pretrained_features = models.vgg_16bn(pretrained=pretrained).features
+        vgg_pretrained_features = models.vgg16_bn(pretrained=pretrained).features
         self.slice1 =  torch.nn.Sequential()
         self.slice2 =  torch.nn.Sequential()
         self.slice3 =  torch.nn.Sequential()
@@ -64,13 +64,12 @@ class vgg16_bn(torch.nn.Module):
             init_weights(self.slice3.modules())
             init_weights(self.slice4.modules())
 
+        init_weights(self.slice5.modules())
 
-       init_weights(self.slice5.modules())
 
-
-       if freeze:
-           for param in self.slice1.parameters():
-               param.requires_grad = False
+        if freeze:
+            for param in self.slice1.parameters():
+                param.requires_grad = False
 
 
 # Define forward pass

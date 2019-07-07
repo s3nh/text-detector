@@ -16,11 +16,11 @@ from basenet.vgg16_bn import vgg16_bn, init_weights
 class DoubleConv(nn.Module):
 
     def __init__(self, in_channel, mid_channel, out_channel):
-        super(DoubleConv, self).__init__
+        super(DoubleConv, self).__init__()
 
         self.conv = nn.Sequential(
-                nn.Conv2d(in_channel + mid_channel, kernel_size = 1), 
-                nn.BarchNorm2d(mid_channel), 
+                nn.Conv2d(in_channel + mid_channel, mid_channel,  kernel_size = 1), 
+                nn.BatchNorm2d(mid_channel), 
                 nn.ReLU(inplace=True), 
                 nn.Conv2d(mid_channel, out_channel, kernel_size = 3, padding = 1), 
                 nn.BatchNorm2d(out_channel), 
@@ -59,7 +59,7 @@ class CRAFT(nn.Module):
         init_weights(self.upconv1.modules())
         init_weights(self.upconv2.modules())
         init_weights(self.upconv3.modules())
-        init_weighrs(self.upconv4.modules())
+        init_weights(self.upconv4.modules())
         init_weights(self.conv_cls.modules())
 
 
