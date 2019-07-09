@@ -54,6 +54,7 @@ class CraftReader(ImageConvert):
         image = self.normalizeMeanVariance()
         image = torch.from_numpy(image).permute(2, 0, 1)
         image = Variable(image.unsqueeze(0))
+        print("self.image shape {}".format(image.shape))
         return image
 
     def boxes_detect(self):
@@ -61,7 +62,7 @@ class CraftReader(ImageConvert):
         ratio_h = ratio_w = 1/ target_ratio
         x =  self.image_preprocess()
 
-        print("to jest preprocessowany x {}".format(x.shape))
+        print("to jest preprocessowany x {}".format(x))
         y, _ = self.net(x)
         score_text = y[0,:, : 0].cpu().data.numpy()
         score_link = y[0:, :, 1].cpu().data.numpy()
