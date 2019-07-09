@@ -13,19 +13,26 @@ import numpy as np
 import text_reco.models.craft.craft_utils as craft_utils
 import text_reco.models.craft.imgproc  as imgproc
 import text_reco.models.craft.file_utils  as file_utils
+from imgproc import ImageConvert
 import json 
 import zipfile
 from collections import OrderedDict
-
+from skimage import io
 from text_reco.models.craft.craft import CRAFT
 
-class CraftReader():
-    def __init__(self, image):
-        self.image = image
+class CraftReader(ImageConvert):
+    def __init__(self,  image):
+        super(CraftReader, self).__init__(image)
+        self.image = io.imread(image)
+        
         self.model_path = 'text_reco/models/craft/pretrain/craft_mlt_25k.pth'
         self.net = CRAFT()
-        self.net.load_state_dict(self.copyStateDict(self.model_path))
+        self.net.load_state_dict(self.copyStateDict(torch.load(self.model_path)))
         self.net.eval()
+        
+        self.mag_ratio = 1
+        self.square_size = 1280
+
 
     @staticmethod
     def copyStateDict(state_dict):
@@ -44,14 +51,17 @@ class CraftReader():
         return v.lower() in ("yes", "y", "t", "1")
         
     def image_preprocess(self):
-        image = imgproc.normalizeMeanVariance(self.image)
+        image = self.normalizeMeanVariance()
         image = torch.from_numpy(image).permute(2, 0, 1)
         image = Variable(image.unsqueeze(0))
+        return image
 
     def boxes_detect(self):
-        img_resized, target_ratio, size_heatmap = imgproc.resize_aspect_ratio(self.image, canvas_size = 1280, interpolation = cv2.INTER_LINEAR, mag_ratio = 1.5)
+        img_resized, target_ratio, size_heatmap = self.resize_aspect_ratio()
         ratio_h = ratio_w = 1/ target_ratio
-        x =  self.image_preprocess(self.image)
+        x =  self.image_preprocess()
+
+        print("to jest preprocessowany x {}".format(x.shape))
         y, _ = self.net(x)
         score_text = y[0,:, : 0].cpu().data.numpy()
         score_link = y[0:, :, 1].cpu().data.numpy()
@@ -60,15 +70,12 @@ class CraftReader():
         return boxes
 
 
-
-# Test imports 
-
-
 def main():
 
-    crr =  CraftReader('image')
-    print(crr.net)
-
+    crr =  CraftReader('data/test.png')
+    print(crr)
+    boxes = crr.boxes_detect()
+    print(boxes)
 
 if __name__ == "__main__":
     main()

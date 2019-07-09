@@ -56,26 +56,21 @@ class CraftReader(ImageConvert):
         image = Variable(image.unsqueeze(0))
         return image
 
-    def boxes_detect(self):
-        img_resized, target_ratio, size_heatmap = self.resize_aspect_ratio()
+    def boxes_detect(self, image):
+        img_resized, target_ratio, size_heatmap = self.resize_aspect_ratio(image)
         ratio_h = ratio_w = 1/ target_ratio
         x =  self.image_preprocess()
-
-        print("to jest preprocessowany x {}".format(x.shape))
         y, _ = self.net(x)
         score_text = y[0,:, : 0].cpu().data.numpy()
-        score_link = y[0:, :, 1].cpu().data.numpy()
+        score_link = y[0, :, :, 1].cpu().data.numpy()
         boxes = craft_utils.getDetBoxes(score_text, score_link, text_threshold, link_threshold, low_test)
         boxes = craft_utils.adjustResultCoordinates(boxes, ratio_w, ratio_h)
         return boxes
 
 
 def main():
-
     crr =  CraftReader('data/test.png')
-    print(crr)
-    boxes = crr.boxes_detect()
-    print(boxes)
-
+    img_ = io.imread('data/test.png')
+    boxes = crr.boxes_detect(img_)
 if __name__ == "__main__":
     main()

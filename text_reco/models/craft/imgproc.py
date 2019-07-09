@@ -14,12 +14,12 @@ class ImageConvert():
         self.mag_ratio = mag_ratio
 
     def normalizeMeanVariance(self):
-        #self.image -= np.array([self.mean[0]  * 255.0, self.mean[1] * 255.0, self.mean[2] * 255.0], dtype = np.uint8)
-        #self.image /= np.array([variance[0] * 255.0, variance[1] * 255.0, variance[2] * 255.0], dtype = np.uint8)
+        self.image -= np.array([self.mean[0]  * 255.0, self.mean[1] * 255.0, self.mean[2] * 255.0], dtype = np.uint8)
+        self.image /= np.array([variance[0] * 255.0, variance[1] * 255.0, variance[2] * 255.0], dtype = np.uint8)
         return self.image
 
-    def resize_aspect_ratio(self):
-        height, width, channel = self.image.shape
+    def resize_aspect_ratio(self, image):
+        height, width, channel = image.shape
         target_size  = self.mag_ratio * max(height, width)
 
         if target_size > self.square_size:
