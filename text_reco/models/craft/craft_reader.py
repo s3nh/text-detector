@@ -24,7 +24,7 @@ class CraftReader(ImageConvert):
     def __init__(self,  image):
         super(CraftReader, self).__init__(image)
         self.image = io.imread(image)
-        
+        self.image = self.image[:, :, :3] 
         self.model_path = 'text_reco/models/craft/pretrain/craft_mlt_25k.pth'
         self.net = CRAFT()
         self.net.load_state_dict(self.copyStateDict(torch.load(self.model_path)))
@@ -50,16 +50,16 @@ class CraftReader(ImageConvert):
     def str2bool(v):
         return v.lower() in ("yes", "y", "t", "1")
         
-    def image_preprocess(self):
-        image = self.normalizeMeanVariance()
+    def image_preprocess(self, image):
+        image = self.normalizeMeanVariance(image)
         image = torch.from_numpy(image).permute(2, 0, 1)
         image = Variable(image.unsqueeze(0))
         return image
 
-    def boxes_detect(self, image):
-        img_resized, target_ratio, size_heatmap = self.resize_aspect_ratio(image)
+    def boxes_detect(self):
+        img_resized, target_ratio, size_heatmap = self.resize_aspect_ratio(self.image)
         ratio_h = ratio_w = 1/ target_ratio
-        x =  self.image_preprocess()
+        x =  self.image_preprocess(img_resized)
         y, _ = self.net(x)
         score_text = y[0,:, : 0].cpu().data.numpy()
         score_link = y[0, :, :, 1].cpu().data.numpy()
@@ -71,6 +71,10 @@ class CraftReader(ImageConvert):
 def main():
     crr =  CraftReader('data/test.png')
     img_ = io.imread('data/test.png')
-    boxes = crr.boxes_detect(img_)
+    img_ = img_[:, :, :3]
+    print(img_.shape)
+    print("Image loaded properly")
+    #i
+    boxes = crr.boxes_detect()
 if __name__ == "__main__":
     main()

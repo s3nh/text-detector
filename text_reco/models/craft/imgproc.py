@@ -13,10 +13,10 @@ class ImageConvert():
         self.interpolation = interpolation
         self.mag_ratio = mag_ratio
 
-    def normalizeMeanVariance(self):
-        self.image -= np.array([self.mean[0]  * 255.0, self.mean[1] * 255.0, self.mean[2] * 255.0], dtype = np.uint8)
-        self.image /= np.array([variance[0] * 255.0, variance[1] * 255.0, variance[2] * 255.0], dtype = np.uint8)
-        return self.image
+    def normalizeMeanVariance(self,image):
+        #self.image -= np.array([self.mean[0]  * 255.0, self.mean[1] * 255.0, self.mean[2] * 255.0], dtype = np.uint8)
+        #self.image /= np.array([variance[0] * 255.0, variance[1] * 255.0, variance[2] * 255.0], dtype = np.uint8)
+        return image
 
     def resize_aspect_ratio(self, image):
         height, width, channel = image.shape
