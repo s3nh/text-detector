@@ -79,7 +79,7 @@ class CRAFT(nn.Module):
         y = self.upconv3(y)
 
 
-        y = F.interpolate(y, size = sources[4].size()[2:], mode = 'bilinear', align_corners=Fale)
+        y = F.interpolate(y, size = sources[4].size()[2:], mode = 'bilinear', align_corners=False)
         y = torch.cat([y, sources[4]], dim =1)
         feature = self.upconv4(y)
 

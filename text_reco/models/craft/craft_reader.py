@@ -62,8 +62,10 @@ class CraftReader(ImageConvert):
         x =  self.image_preprocess(img_resized)
         y, _ = self.net(x)
         score_text = y[0,:, : 0].cpu().data.numpy()
+        print("SCore text {}".format(score_text))
         score_link = y[0, :, :, 1].cpu().data.numpy()
-        boxes = craft_utils.getDetBoxes(score_text, score_link, text_threshold, link_threshold, low_test)
+        print("score link {}".format(score_link))
+        boxes = craft_utils.getDetBoxes(textmap =score_text, linkmap = score_link, text_threshold =0.7, link_threshold=0.4, low_text=0.4)
         boxes = craft_utils.adjustResultCoordinates(boxes, ratio_w, ratio_h)
         return boxes
 

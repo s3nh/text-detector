@@ -13,7 +13,6 @@ from torchvision.models.vgg import model_urls
 
 def init_weights(modules):
     # https://prateekvjoshi.com/2016/03/29/understanding-xavier-initialization-in-deep-neural-networks/ 
-
     for m in modules:
         if isinstance(m, nn.Conv2d):
             init.xavier_uniform_(m.weight.data)
@@ -32,17 +31,14 @@ def init_weights(modules):
 class vgg16_bn(torch.nn.Module):
 
     def __init__(self, pretrained =  True, freeze = True):
-
         super(vgg16_bn, self).__init__()
         model_urls['vgg16_bn'] = model_urls['vgg16_bn'].replace('https://', 'http://')
-
         vgg_pretrained_features = models.vgg16_bn(pretrained=pretrained).features
         self.slice1 =  torch.nn.Sequential()
         self.slice2 =  torch.nn.Sequential()
         self.slice3 =  torch.nn.Sequential()
         self.slice4 =  torch.nn.Sequential()
         self.slice5 =  torch.nn.Sequential()
-
 
         for x in range(12):
             self.slice1.add_module(str(x), vgg_pretrained_features[x])
@@ -86,7 +82,7 @@ class vgg16_bn(torch.nn.Module):
         h_relu5_3 = h
         h = self.slice5(h)
         h_fc7 = h
-        vgg_outputs =  nametuple("VggOutputs", ['fc7', 'relu5_3', 'relu4_3', 'relu3_2', 'relu2_2'])
+        vgg_outputs =  namedtuple("VggOutputs", ['fc7', 'relu5_3', 'relu4_3', 'relu3_2', 'relu2_2'])
         out = vgg_outputs(h_fc7 ,h_relu5_3, h_relu4_3, h_relu3_2, h_relu2_2)
         return out
         
