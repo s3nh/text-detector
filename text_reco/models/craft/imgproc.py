@@ -6,6 +6,7 @@ import cv2
 class ImageConvert():
     def __init__(self, img_array, interpolation =cv2.INTER_LINEAR ,  square_size = 1280,  mag_ratio=1):
         self.image = io.imread(img_array)
+        self.image = self.image[:, :, :3]
         print("Shape of processed file {}".format(len(self.image)))
         self.mean = (0.485, 0.486, 0.406)
         self.variance =  (0.229, 0.224, 0.225)
@@ -14,8 +15,9 @@ class ImageConvert():
         self.mag_ratio = mag_ratio
 
     def normalizeMeanVariance(self,image):
-        image -= np.array([self.mean[0]  * 255.0, self.mean[1] * 255.0, self.mean[2] * 255.0], dtype = np.uint8)
-        image /= np.array([self.variance[0] * 255.0, self.variance[1] * 255.0, self.variance[2] * 255.0], dtype = np.uint8)
+        image = image.copy().astype(np.float32)
+        image -= np.array([self.mean[0]  * 255.0, self.mean[1] * 255.0, self.mean[2] * 255.0], dtype = np.float32)
+        image /= np.array([self.variance[0] * 255.0, self.variance[1] * 255.0, self.variance[2] * 255.0], dtype = np.float32)
         return image
 
     def resize_aspect_ratio(self, image):

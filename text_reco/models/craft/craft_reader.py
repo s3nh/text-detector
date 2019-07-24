@@ -33,7 +33,6 @@ class CraftReader(ImageConvert):
         self.mag_ratio = 1
         self.square_size = 1280
 
-
     @staticmethod
     def copyStateDict(state_dict):
         if list(state_dict.keys())[0].startswith("module"):
@@ -61,10 +60,11 @@ class CraftReader(ImageConvert):
         ratio_h = ratio_w = 1/ target_ratio
         x =  self.image_preprocess(img_resized)
         y, _ = self.net(x)
-        score_text = y[0,:, : 0].cpu().data.numpy()
-        print("SCore text {}".format(score_text))
+        
+        
+        print("zaczytano y i y wynosi {}".format(y))
+        score_text = y[0,:, :,  0].cpu().data.numpy()
         score_link = y[0, :, :, 1].cpu().data.numpy()
-        print("score link {}".format(score_link))
         boxes = craft_utils.getDetBoxes(textmap =score_text, linkmap = score_link, text_threshold =0.7, link_threshold=0.4, low_text=0.4)
         boxes = craft_utils.adjustResultCoordinates(boxes, ratio_w, ratio_h)
         return boxes
@@ -72,11 +72,8 @@ class CraftReader(ImageConvert):
 
 def main():
     crr =  CraftReader('data/test.png')
-    img_ = io.imread('data/test.png')
-    img_ = img_[:, :, :3]
-    print(img_.shape)
-    print("Image loaded properly")
-    #i
     boxes = crr.boxes_detect()
+    print(boxes)
+
 if __name__ == "__main__":
     main()
