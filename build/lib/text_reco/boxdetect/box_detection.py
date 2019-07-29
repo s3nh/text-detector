@@ -1,6 +1,6 @@
 # Simple logic 
 # box on input - preprocess - sliced image on output
-
+import cv2
 
 class BoxDetect():
 
@@ -13,9 +13,7 @@ class BoxDetect():
         print("To sa boxy")
         print(self.boxes)
         for el in self.boxes:
-            print("to jest el")
-            print(el)
-
+            tmp_img = cv2.rectangle(image, (el[0], el[1]), (el[2], el[3]))
 
 
 

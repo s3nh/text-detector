@@ -74,8 +74,13 @@ def main():
     crr =  CraftReader('data/test.png')
     boxes = crr.boxes_detect()
     bd = BoxDetect(boxes)
-    print(bd.n_boxes)
-    print(bd.preprocess('data/test.png'))
-
+    for box in boxes:
+        x, y, w, h = cv2.boundingRect(box)
+        roi = crr.image[y-2:y+h+2, x-2:x+w+2]
+        try:
+            cv2.imshow('image', roi)
+            cv2.waitKey(0)
+        except:
+            continue
 if __name__ == "__main__":
     main()
