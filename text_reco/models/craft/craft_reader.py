@@ -19,7 +19,7 @@ import zipfile
 from collections import OrderedDict
 from skimage import io
 from text_reco.models.craft.craft import CRAFT
-
+from text_reco.boxdetect.box_detection import BoxDetect
 class CraftReader(ImageConvert):
     def __init__(self,  image):
         super(CraftReader, self).__init__(image)
@@ -73,7 +73,9 @@ class CraftReader(ImageConvert):
 def main():
     crr =  CraftReader('data/test.png')
     boxes = crr.boxes_detect()
-    print(boxes)
+    bd = BoxDetect(boxes)
+    print(bd.n_boxes)
+    print(bd.preprocess('data/test.png'))
 
 if __name__ == "__main__":
     main()

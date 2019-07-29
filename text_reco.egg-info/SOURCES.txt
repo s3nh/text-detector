@@ -1,10 +1,13 @@
 README.md
 setup.py
 text_reco/__init__.py
+text_reco/box_detection.py
 text_reco.egg-info/PKG-INFO
 text_reco.egg-info/SOURCES.txt
 text_reco.egg-info/dependency_links.txt
 text_reco.egg-info/top_level.txt
+text_reco/boxdetect/__init__.py
+text_reco/boxdetect/box_detection.py
 text_reco/models/__init__.py
 text_reco/models/craft/__init__.py
 text_reco/models/craft/craft.py
