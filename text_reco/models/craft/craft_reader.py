@@ -67,16 +67,17 @@ class CraftReader(ImageConvert):
         score_link = y[0, :, :, 1].cpu().data.numpy()
         boxes = craft_utils.getDetBoxes(textmap =score_text, linkmap = score_link, text_threshold =0.7, link_threshold=0.4, low_text=0.4)
         boxes = craft_utils.adjustResultCoordinates(boxes, ratio_w, ratio_h)
-        return boxes
+        return boxes, img_resized
 
 
 def main():
     crr =  CraftReader('data/test.png')
-    boxes = crr.boxes_detect()
+    boxes, img_res = crr.boxes_detect()
     bd = BoxDetect(boxes)
     for box in boxes:
         x, y, w, h = cv2.boundingRect(box)
-        roi = crr.image[y-2:y+h+2, x-2:x+w+2]
+        print(box)
+        roi = img_res[x-2:x+h+2, y-2:y+w+2]
         try:
             cv2.imshow('image', roi)
             cv2.waitKey(0)
