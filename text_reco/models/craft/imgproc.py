@@ -8,7 +8,7 @@ class ImageConvert():
         self.image = io.imread(img_array)
         self.image = self.image[:, :, :3]
         print("Shape of processed file {}".format(len(self.image)))
-        self.mean = (0.485, 0.486, 0.406)
+        self.mean = (0.485, 0.456, 0.406)
         self.variance =  (0.229, 0.224, 0.225)
         self.square_size = square_size
         self.interpolation = interpolation

@@ -23,8 +23,8 @@ from text_reco.boxdetect.box_detection import BoxDetect
 class CraftReader(ImageConvert):
     def __init__(self,  image):
         super(CraftReader, self).__init__(image)
-        self.image = io.imread(image)
-        self.image = self.image[:, :, :3] 
+       # self.image = io.imread(image)
+        #self.image = self.image[:, :, :3] 
         self.model_path = 'text_reco/models/craft/pretrain/craft_mlt_25k.pth'
         self.net = CRAFT()
         self.net.load_state_dict(self.copyStateDict(torch.load(self.model_path)))
@@ -50,7 +50,7 @@ class CraftReader(ImageConvert):
         return v.lower() in ("yes", "y", "t", "1")
         
     def image_preprocess(self, image):
-        image = self.normalizeMeanVariance(image)
+        #image = self.normalizeMeanVariance(image)
         image = torch.from_numpy(image).permute(2, 0, 1)
         image = Variable(image.unsqueeze(0))
         return image
@@ -62,22 +62,22 @@ class CraftReader(ImageConvert):
         y, _ = self.net(x)
         
         
-        print("zaczytano y i y wynosi {}".format(y))
         score_text = y[0,:, :,  0].cpu().data.numpy()
         score_link = y[0, :, :, 1].cpu().data.numpy()
         boxes = craft_utils.getDetBoxes(textmap =score_text, linkmap = score_link, text_threshold =0.7, link_threshold=0.4, low_text=0.4)
+        print("Ilosc boxow {}".format(len(boxes)))
         boxes = craft_utils.adjustResultCoordinates(boxes, ratio_w, ratio_h)
-        return boxes, img_resized
+        return boxes, img_resized 
 
 
 def main():
     crr =  CraftReader('data/test.png')
     boxes, img_res = crr.boxes_detect()
-    bd = BoxDetect(boxes)
+    print(img_res.shape)
     for box in boxes:
-        x, y, w, h = cv2.boundingRect(box)
-        print(box)
-        roi = img_res[x-2:x+h+2, y-2:y+w+2]
+        x,y,w,h = cv2.boundingRect(box)
+        print("x {} y {} w {} h {}".format(x, y, w, h))
+        roi = img_res[x-2:x+h+2, y-2:y+w+2 ]
         try:
             cv2.imshow('image', roi)
             cv2.waitKey(0)
