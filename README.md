@@ -1,20 +1,39 @@
 # Text recognition tool
 
-End to end text recognition. 
-
-technologies:
-
-
-- CRAFT 
-- CRNN
-
-
-Start 03072019
-
-Focus on fast processing, frontend, compatibility. 
+Text recognition with Pytorch Using CRNN and CRAFT 
+pretrained models. 
 
 
 
-To do:
 
-everythin
+Main sources:
+
+- [Character Region Awareness for Text Detection Paper](https://arxiv.org/pdf/1904.01941.pdf)
+- [CRNN Paper]
+
+
+### Installing 
+
+
+## Deployment
+
+
+## Contributing
+
+
+## Versioning
+
+
+## Authors
+
+
+## Acknowledments 
+
+Input image (TODO: Preprocess origin format)
+Output - file with predicted words  on input file
+
+
+```python
+Image -> CRAFT -> CRNN -> .json
+
+```
