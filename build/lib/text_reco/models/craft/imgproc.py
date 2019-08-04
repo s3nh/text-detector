@@ -6,9 +6,10 @@ import cv2
 class ImageConvert():
     def __init__(self, img_array, interpolation =cv2.INTER_LINEAR ,  square_size = 1280,  mag_ratio=1):
         self.image = io.imread(img_array)
-        self.image = self.image[:, :, :3]
+        self.image =  self.image[:, :, :3]
+        self.image = np.array(self.image)
         print("Shape of processed file {}".format(len(self.image)))
-        self.mean = (0.485, 0.486, 0.406)
+        self.mean = (0.485, 0.456, 0.406)
         self.variance =  (0.229, 0.224, 0.225)
         self.square_size = square_size
         self.interpolation = interpolation

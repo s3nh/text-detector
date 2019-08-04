@@ -23,8 +23,8 @@ from text_reco.boxdetect.box_detection import BoxDetect
 class CraftReader(ImageConvert):
     def __init__(self,  image):
         super(CraftReader, self).__init__(image)
-        self.image = io.imread(image)
-        self.image = self.image[:, :, :3] 
+       # self.image = io.imread(image)
+        #self.image = self.image[:, :, :3] 
         self.model_path = 'text_reco/models/craft/pretrain/craft_mlt_25k.pth'
         self.net = CRAFT()
         self.net.load_state_dict(self.copyStateDict(torch.load(self.model_path)))
@@ -62,25 +62,28 @@ class CraftReader(ImageConvert):
         y, _ = self.net(x)
         
         
-        print("zaczytano y i y wynosi {}".format(y))
-        score_text = y[0,:, :,  0].cpu().data.numpy()
+        score_text = y[0, :, :, 0].cpu().data.numpy()
         score_link = y[0, :, :, 1].cpu().data.numpy()
         boxes = craft_utils.getDetBoxes(textmap =score_text, linkmap = score_link, text_threshold =0.7, link_threshold=0.4, low_text=0.4)
+        print("Ilosc boxow {}".format(len(boxes)))
         boxes = craft_utils.adjustResultCoordinates(boxes, ratio_w, ratio_h)
-        return boxes
+        return boxes, img_resized 
 
 
 def main():
     crr =  CraftReader('data/test.png')
-    boxes = crr.boxes_detect()
+    boxes, img_res = crr.boxes_detect()
+    cv2.imwrite('data/resized.png', img_res)
+    tmp_dict = dict()
+    #for iter_, box in enumerate(boxes):
+    #    x,y,w,h = cv2.boundingRect(box)
+    #    roi = img_res[x:x+w, y:y+h]
+    #    tmp_dict[iter_] = box.tolist()
+    #print(tmp_dict)
+    #with open('data/box.json', 'w') as jsonfile:
+    #    json.dump(tmp_dict, jsonfile)
     bd = BoxDetect(boxes)
-    for box in boxes:
-        x, y, w, h = cv2.boundingRect(box)
-        roi = crr.image[y-2:y+h+2, x-2:x+w+2]
-        try:
-            cv2.imshow('image', roi)
-            cv2.waitKey(0)
-        except:
-            continue
+    img = cv2.imread('data/resized.png')
+    cv2.imshow(img)
 if __name__ == "__main__":
     main()
