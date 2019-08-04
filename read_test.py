@@ -11,14 +11,29 @@ def main():
 
     
     img = cv2.imread('data/resized.png')
-    cv2.imshow('image', img)
-    cv2.waitKey(0)
+    # cv2.imshow('image', img)
+    # cv2.waitKey(0)
     with open('data/box.json', 'r') as jsonfile:
         boxes = json.load(jsonfile)
-    for el in boxes.keys():
-        print(boxes[el])
-    bd = BoxDetect(boxes)
-    bd.preprocess_box(boxes, img)
+    
+    for key_ in boxes.keys(): 
+        # ANalysis for first box
+        tmp_box = boxes[key_]
+        x = int(tmp_box[0][0])
+        y = int(tmp_box[0][1])
+        w = int(np.abs(tmp_box[0][0] -  tmp_box[1][0]))
+        h = int(np.abs(tmp_box[0][1] - tmp_box[2][1]))
+
+        print(tmp_box)
+        print("Y {} X {} W {} H {}".format(y,x ,w,h))
+    
+        tmp_img = img[y:y+h, x:x+w]
+        cv2.imshow('tmp_img', tmp_img)
+        cv2.waitKey(0)
+    
+    #print(boxes[el])
+    #bd = BoxDetect(boxes)
+    #bd.preprocess_box(boxes, img)
 
 if __name__ == "__main__":
     main()
