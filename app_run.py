@@ -37,7 +37,7 @@ def main():
         cv2.imshow('tmp_img', tmp_img)
         cv2.waitKey(0)
         tmp_img = crnn.transformer(tmp_img)
-        tmp_img = img.view(1, *tmp_img.size())
+        tmp_img = tmp_img.view(1, *tmp_img.size())
         tmp_img = Variable(tmp_img)
         crnn.get_predictions(tmp_img)
 		
