@@ -17,8 +17,8 @@ class ImageConvert():
 
     def normalizeMeanVariance(self,image):
         image = image.copy().astype(np.float32)
-        image -= np.array([self.mean[0]  * 255.0, self.mean[1] * 255.0, self.mean[2] * 255.0], dtype = np.float32)
-        image /= np.array([self.variance[0] * 255.0, self.variance[1] * 255.0, self.variance[2] * 255.0], dtype = np.float32)
+        #image -= np.array([self.mean[0]  * 255.0, self.mean[1] * 255.0, self.mean[2] * 255.0], dtype = np.float32)
+        #image /= np.array([self.variance[0] * 255.0, self.variance[1] * 255.0, self.variance[2] * 255.0], dtype = np.float32)
         return image
 
     def resize_aspect_ratio(self, image):

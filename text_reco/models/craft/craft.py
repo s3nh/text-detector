@@ -6,7 +6,7 @@ import torch.nn.functional as F
 
 # Import basenet vgg16 weights
 
-from basenet.vgg16_bn import vgg16_bn, init_weights
+from text_reco.models.craft.basenet.vgg16_bn import vgg16_bn, init_weights
 
 # Double conv class
 # Conv(in + mid) -> BatchNorm -> ReLU -> Conv(mid) -> BatchNorm -> ReLU

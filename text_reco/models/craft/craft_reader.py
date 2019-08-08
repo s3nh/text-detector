@@ -13,23 +13,21 @@ import numpy as np
 import text_reco.models.craft.craft_utils as craft_utils
 import text_reco.models.craft.imgproc  as imgproc
 import text_reco.models.craft.file_utils  as file_utils
-from imgproc import ImageConvert
+from text_reco.models.craft.imgproc import ImageConvert
 import json 
 import zipfile
 from collections import OrderedDict
 from skimage import io
 from text_reco.models.craft.craft import CRAFT
 from text_reco.boxdetect.box_detection import BoxDetect
+
 class CraftReader(ImageConvert):
     def __init__(self,  image):
         super(CraftReader, self).__init__(image)
-       # self.image = io.imread(image)
-        #self.image = self.image[:, :, :3] 
         self.model_path = 'text_reco/models/craft/pretrain/craft_mlt_25k.pth'
         self.net = CRAFT()
         self.net.load_state_dict(self.copyStateDict(torch.load(self.model_path)))
         self.net.eval()
-        
         self.mag_ratio = 1
         self.square_size = 1280
 
@@ -75,15 +73,14 @@ def main():
     boxes, img_res = crr.boxes_detect()
     cv2.imwrite('data/resized.png', img_res)
     tmp_dict = dict()
-    #for iter_, box in enumerate(boxes):
-    #    x,y,w,h = cv2.boundingRect(box)
-    #    roi = img_res[x:x+w, y:y+h]
-    #    tmp_dict[iter_] = box.tolist()
-    #print(tmp_dict)
-    #with open('data/box.json', 'w') as jsonfile:
-    #    json.dump(tmp_dict, jsonfile)
-    bd = BoxDetect(boxes)
-    img = cv2.imread('data/resized.png')
-    cv2.imshow(img)
+    for tmp_box in boxes:
+        x = int(tmp_box[0][0])
+        y = int(tmp_box[0][1])
+        w = int(np.abs(tmp_box[0][0] - tmp_box[1][0]))
+        h = int(np.abs(tmp_box[0][1] - tmp_box[2][1]))
+        tmp_img = img_res[y:y+h, x:x+w]
+        #cv2.imshow('tmp_img', tmp_img)
+        #cv2.waitKey(0)
+        
 if __name__ == "__main__":
     main()

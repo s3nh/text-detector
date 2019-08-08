@@ -6,10 +6,7 @@ import numpy as np
 
 # Test loadboxow
 
-
 def main():
-
-    
     img = cv2.imread('data/resized.png')
     # cv2.imshow('image', img)
     # cv2.waitKey(0)
@@ -17,7 +14,6 @@ def main():
         boxes = json.load(jsonfile)
     
     for key_ in boxes.keys(): 
-        # ANalysis for first box
         tmp_box = boxes[key_]
         x = int(tmp_box[0][0])
         y = int(tmp_box[0][1])
@@ -31,9 +27,6 @@ def main():
         cv2.imshow('tmp_img', tmp_img)
         cv2.waitKey(0)
     
-    #print(boxes[el])
-    #bd = BoxDetect(boxes)
-    #bd.preprocess_box(boxes, img)
 
 if __name__ == "__main__":
     main()
