@@ -4,7 +4,7 @@ from torch.autograd import Variable
 import text_reco.models.crnn.utils  as utils
 import text_reco.models.crnn.preprocess as preprocess
 from PIL import Image
-
+from skimage import io
 import text_reco.models.crnn.crnn as crnn
 
 class CRNNReader():
@@ -23,7 +23,6 @@ class CRNNReader():
     def load_image(self):
         img = Image.open(self.img_path).convert('L')
         img = self.transformer(img)
-        # Resizing 
         img = img.view(1, *img.size())
         img = Variable(img)
         return img
@@ -36,13 +35,9 @@ class CRNNReader():
         results =  self.converter.decode(predictions.data, pred_size.data, raw=False)
         return results
 
-
 def main():
     crnn = CRNNReader()
     print(crnn.model)
 
 if __name__ == "__main__":
     main()
-
-
-

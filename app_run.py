@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.backends.cudnn as cudnn
 from torch.autograd import Variable
 from PIL import Image
+import skimage
 
 import cv2
 from skimage import io 
@@ -36,10 +37,14 @@ def main():
         tmp_img =  img_res[y:y+h, x:x+w]
         cv2.imshow('tmp_img', tmp_img)
         cv2.waitKey(0)
+        #tmp_img = skimage.transform.resize(tmp_img, (64, 64))
+        tmp_img = tmp_img[:, :, ::-1]
         tmp_img = crnn.transformer(tmp_img)
         tmp_img = tmp_img.view(1, *tmp_img.size())
         tmp_img = Variable(tmp_img)
-        crnn.get_predictions(tmp_img)
+        print(tmp_img.size)
+        print(tmp_img)
+        #crnn.get_predictions(tmp_img)
 		
 if __name__ == "__main__":
     main()

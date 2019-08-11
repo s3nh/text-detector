@@ -79,8 +79,8 @@ def main():
         w = int(np.abs(tmp_box[0][0] - tmp_box[1][0]))
         h = int(np.abs(tmp_box[0][1] - tmp_box[2][1]))
         tmp_img = img_res[y:y+h, x:x+w]
-        #cv2.imshow('tmp_img', tmp_img)
-        #cv2.waitKey(0)
+        cv2.imshow('tmp_img', tmp_img)
+        cv2.waitKey(0)
         
 if __name__ == "__main__":
     main()
