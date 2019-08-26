@@ -1,3 +1,5 @@
+import skimage
+
 import random
 import torch
 from torch.utils.data import Dataset
@@ -71,7 +73,7 @@ class resizeNormalize(object):
         self.toTensor = transforms.ToTensor()
 
     def __call__(self, img):
-        img = img.resize(self.size, self.interpolation)
+        img = skimage.transform.resize(img, (64, 64), self.interpolation)
         img = self.toTensor(img)
         img.sub_(0.5).div_(0.5)
         return img

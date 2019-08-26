@@ -8,11 +8,11 @@ from skimage import io
 import text_reco.models.crnn.crnn as crnn
 
 class CRNNReader():
-
     def __init__(self,img_path,  model_path= 'text_reco/models/crnn/pretrain/crnn.pth'):
 
         self.model_path = model_path
         self.model = crnn.CRNN(32, 1,37, 256)
+        self.model = self.model.float()
         self.model.load_state_dict(torch.load(self.model_path))
         self.model.eval()
         self.img_path = img_path
@@ -22,12 +22,15 @@ class CRNNReader():
 
     def load_image(self):
         img = Image.open(self.img_path).convert('L')
+        
         img = self.transformer(img)
         img = img.view(1, *img.size())
         img = Variable(img)
         return img
 
     def get_predictions(self, img):
+        self.model = self.model.float()
+        img = img.float()
         predictions = self.model(img)
         _, predictions = predictions.max(2)
         predictions = predictions.transpose(1, 0).contiguous().view(-1)

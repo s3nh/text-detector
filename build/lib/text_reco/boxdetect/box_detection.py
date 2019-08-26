@@ -1,7 +1,7 @@
 # Simple logic 
 # box on input - preprocess - sliced image on output
 import cv2
-
+import numpy as np 
 class BoxDetect():
 
     def __init__(self, boxes):
@@ -24,9 +24,10 @@ class BoxDetect():
     @staticmethod 
     def preprocess_box(file_, img):
         for el in file_.keys():
-            x,y,w,h = cv2.boundingRect(file_[el])
+            x,y,w,h = cv2.boundingRect(np.array(file_[el]))
             roi = img[x:x+w, y:y+h]
             cv2.imshow('image', roi)
             cv2.waitKey(0)
+
 
 

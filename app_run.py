@@ -21,30 +21,24 @@ from text_reco.models.craft.craft_reader import CraftReader
 from text_reco.boxdetect.box_detection import BoxDetect
 from text_reco.models.crnn.crnn_run import CRNNReader
 
-def cut_box(tmp_box):
-    x = int(tmp_box[0][0])
-    y = int(tmp_box[0][1])
-    w = int(np.abs(tmp_box[0][0] - tmp_box[1][0]))
-    h = int(np.abs(tmp_box[0][1] - tmp_box[2][1]))
-    return x, y, w, h
 
 def main():
-    crnn = CRNNReader('data/test.png')
+    crnn = CRNNReader()
     crr = CraftReader('data/test.png')
-    box, img_res = crr.boxes_detect()
-    for tmp_box in box:
-        x, y, w, h = cut_box(tmp_box)
+    boxes, img_res = crr.boxes_detect()
+    for _, tmp_box in enumerate(boxes):
+        x = int(tmp_box[0][0])
+        y = int(tmp_box[0][1])
+        w = int(np.abs(tmp_box[0][0] - tmp_box[1][0]))
+        h = int(np.abs(tmp_box[0][1] - tmp_box[2][1]))
         tmp_img =  img_res[y:y+h, x:x+w]
         cv2.imshow('tmp_img', tmp_img)
         cv2.waitKey(0)
         #tmp_img = skimage.transform.resize(tmp_img, (64, 64))
-        tmp_img = tmp_img[:, :, ::-1]
-        tmp_img = crnn.transformer(tmp_img)
-        tmp_img = tmp_img.view(1, *tmp_img.size())
-        tmp_img = Variable(tmp_img)
-        print(tmp_img.size)
-        print(tmp_img)
-        #crnn.get_predictions(tmp_img)
+        #tmp_img = tmp_img[:, :, ::-1]
+        #tmp_img = crnn.transformer(tmp_img)
+        #tmp_img = tmp_img.view(1, *tmp_img.size())
+        #tmp_img = Variable(tmp_img)
 		
 if __name__ == "__main__":
     main()
