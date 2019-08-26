@@ -1,0 +1,5 @@
+/data/
+*.pth
+*.pkl
+*.png
+*.jpeg
