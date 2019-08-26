@@ -84,11 +84,10 @@ def main():
         y = int(tmp_box[0][1])
         w = int(np.abs(tmp_box[0][0] - tmp_box[1][0]))
         h = int(np.abs(tmp_box[0][1] - tmp_box[2][1]))
-        tmp_img = img_res[y:y+h, x:x+w]
+        tmp_img = img_res[y-2 :y+h+2, x-2:x+w+2]
         cv2.imwrite('data/{}_box.png'.format(_), tmp_img)	
-        cv2.imshow('tmp_img', tmp_img)
-        cv2.waitKey(0)
-        image_ = Image.open('data/{}_box.png'.format(_))
+        #image_ = tmp_img.copy()
+        image_ = Image.open('data/{}_box.png'.format(_)).convert('L')
         image_ = crnn.transformer(image_)
         image_ = image_.view(1, *image_.size())
         image_ = Variable(image_)
