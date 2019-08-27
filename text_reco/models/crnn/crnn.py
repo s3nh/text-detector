@@ -61,4 +61,3 @@ class CRNN(nn.Module):
         conv = conv.permute(2, 0, 1)  # [w, b, c]
         output = self.rnn(conv)
         return output
-
