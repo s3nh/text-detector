@@ -33,11 +33,9 @@ def getDetBoxes_core(textmap, linkmap, text_threshold, link_threshold, low_text)
         if ey >= img_h: ey = img_h
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(1 + niter, 1 + niter))
         segmap[sy:ey, sx:ex] = cv2.dilate(segmap[sy:ey, sx:ex], kernel)
-
         np_contours = np.roll(np.array(np.where(segmap!=0)),1,axis=0).transpose().reshape(-1,2)
         rectangle = cv2.minAreaRect(np_contours)
         box = cv2.boxPoints(rectangle)
-
         w, h = np.linalg.norm(box[0] - box[1]), np.linalg.norm(box[1] - box[2])
         box_ratio = max(w, h) / (min(w, h) + 1e-5)
         if abs(1 - box_ratio) <= 0.1:
@@ -51,10 +49,8 @@ def getDetBoxes_core(textmap, linkmap, text_threshold, link_threshold, low_text)
         mapper.append(k)
     return det, labels, mapper
 
-
 def getDetBoxes(textmap, linkmap, text_threshold, link_threshold, low_text):
     boxes, labels, mapper = getDetBoxes_core(textmap, linkmap, text_threshold, link_threshold, low_text)
-
     return boxes
 
 def adjustResultCoordinates(polys, ratio_w, ratio_h, ratio_net = 2):
