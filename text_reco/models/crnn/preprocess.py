@@ -12,7 +12,6 @@ from PIL import Image
 import numpy as np
 
 class lmdbDataset(Dataset):
-
     def __init__(self, root=None, transform=None, target_transform=None):
         self.env = lmdb.open(
             root,
