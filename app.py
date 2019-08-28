@@ -4,6 +4,8 @@ import torch.backends.cudnn as cudnn
 from torch.autograd import Variable
 from PIL import Image
 import skimage
+import argparse
+
 
 import cv2
 from skimage import io 
@@ -20,10 +22,18 @@ from text_reco.models.craft.craft_reader import CraftReader
 from text_reco.boxdetect.box_detection import BoxDetect
 from text_reco.models.crnn.crnn_run import CRNNReader
 
+def build_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--infile', type = str, help = 'dataset to preprocess')
+    args = parser.parse_args()
+    return args
+
+
 def main():
+    args= build_args()
     results = {}
     crnn = CRNNReader()
-    crr = CraftReader('data/test.png')
+    crr = CraftReader(args.infile)
     boxes, img_res = crr.boxes_detect()
     for _, tmp_box in enumerate(boxes):
         x = int(tmp_box[0][0])

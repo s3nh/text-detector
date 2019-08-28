@@ -1,5 +1,7 @@
 README.md
 setup.py
+base/__init__.py
+base/watchdog.py
 text_reco/__init__.py
 text_reco.egg-info/PKG-INFO
 text_reco.egg-info/SOURCES.txt
