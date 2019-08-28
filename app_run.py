@@ -21,6 +21,7 @@ from text_reco.boxdetect.box_detection import BoxDetect
 from text_reco.models.crnn.crnn_run import CRNNReader
 
 def main():
+    results = {}
     crnn = CRNNReader()
     crr = CraftReader('data/test.png')
     boxes, img_res = crr.boxes_detect()
@@ -30,15 +31,14 @@ def main():
         w = int(np.abs(tmp_box[0][0] - tmp_box[1][0]))
         h = int(np.abs(tmp_box[0][1] - tmp_box[2][1]))
         tmp_img =  img_res[y:y+h, x:x+w]
-        print("SHape dataset {}".format(tmp_img.shape))
-        # Transform 
-        tmp_img.save( 'data/box_{}.jpeg'.format(_))
-        del tmp_img
-        tmp_img = Image.open('data/box_{}.jpeg'.format(_))
+        tmp_img = Image.fromarray(tmp_img.astype('uint8')).convert('L')
         tmp_img = crnn.transformer(tmp_img)
         tmp_img = tmp_img.view(1, *tmp_img.size())
         tmp_img = Variable(tmp_img)
-        print(crnn.get_predictions(tmp_img))
+        results['{}'.format(_)] = crnn.get_predictions(tmp_img)
+    with open('results.json', 'w') as file:
+        json.dump(results, file)
+        print(results)
 
 if __name__ == "__main__":
     main()
