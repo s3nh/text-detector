@@ -1,3 +1,5 @@
+[travis build](https://api.travis-ci.com/s3nh/pytorch-text-recognition.svg?branch=master)
+
 # Text recognition tool
 
 Text recognition with Pytorch Using CRNN and CRAFT 
