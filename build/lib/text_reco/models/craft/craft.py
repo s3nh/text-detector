@@ -1,20 +1,9 @@
-
-# https://arxiv.org/pdf/1904.01941.pdf
 import torch
 import torch.nn as nn 
 import torch.nn.functional as F
-
-# Import basenet vgg16 weights
-
 from text_reco.models.craft.basenet.vgg16_bn import vgg16_bn, init_weights
 
-# Double conv class
-# Conv(in + mid) -> BatchNorm -> ReLU -> Conv(mid) -> BatchNorm -> ReLU
-
-
-
 class DoubleConv(nn.Module):
-
     def __init__(self, in_channel, mid_channel, out_channel):
         super(DoubleConv, self).__init__()
 
@@ -26,19 +15,14 @@ class DoubleConv(nn.Module):
                 nn.BatchNorm2d(out_channel), 
                 nn.ReLU(inplace=True))
 
-    # Forward pass definition
     def forward(self, x):
         x = self.conv(x)
         return x
 
-# CRAFT Architecture
-
 class CRAFT(nn.Module):
-
     def __init__(self, pretrained=False, freeze=False):
         super(CRAFT, self).__init__()
         self.basenet = vgg16_bn(pretrained, freeze)
-
         self.upconv1 = DoubleConv(1024, 512, 256)
         self.upconv2 = DoubleConv(512, 256, 128)
         self.upconv3 = DoubleConv(256, 128, 64)
@@ -62,9 +46,7 @@ class CRAFT(nn.Module):
         init_weights(self.upconv4.modules())
         init_weights(self.conv_cls.modules())
 
-
     def forward(self, x):
-
         sources = self.basenet(x)
         y = torch.cat([sources[0], sources[1]], dim=1)
         y = self.upconv1(y)
@@ -73,18 +55,14 @@ class CRAFT(nn.Module):
         y = torch.cat([y, sources[2]], dim=1)
         y = self.upconv2(y)
 
-
         y = F.interpolate(y, size = sources[3].size()[2:], mode = 'bilinear', align_corners=False)
         y = torch.cat([y, sources[3]], dim=1)
         y = self.upconv3(y)
 
-
         y = F.interpolate(y, size = sources[4].size()[2:], mode = 'bilinear', align_corners=False)
         y = torch.cat([y, sources[4]], dim =1)
         feature = self.upconv4(y)
-
         y = self.conv_cls(feature)
 
         return y.permute(0, 2, 3, 1), feature
-
 
