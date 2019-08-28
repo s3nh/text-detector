@@ -1,4 +1,6 @@
 data/
+*.swp
+*.swo
 *.pth
 *.pkl
 *.png
