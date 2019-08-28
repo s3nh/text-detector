@@ -15,7 +15,7 @@ class CRNNReader():
         self.model.load_state_dict(torch.load(self.model_path))
         self.model.eval()
         self.alphabet = '0123456789abcdefghijklmnopqrstuv2xyz'
-        self.transformer =  preprocess.resizeNormalize((100, 32))
+        self.transformer =  preprocess.resizeNormalize(size=(100, 32))
         self.converter = utils.strLabelConverter(self.alphabet)
 
     def get_predictions(self, img):

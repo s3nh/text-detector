@@ -12,7 +12,6 @@ text_reco/models/craft/__init__.py
 text_reco/models/craft/craft.py
 text_reco/models/craft/craft_reader.py
 text_reco/models/craft/craft_utils.py
-text_reco/models/craft/file_utils.py
 text_reco/models/craft/imgproc.py
 text_reco/models/craft/basenet/__init__.py
 text_reco/models/craft/basenet/vgg16_bn.py

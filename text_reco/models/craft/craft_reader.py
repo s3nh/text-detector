@@ -4,7 +4,6 @@ import torch.backends.cudnn as cudnn
 from  torch.autograd import Variable
 import text_reco.models.craft.craft_utils as craft_utils
 import text_reco.models.craft.imgproc as img_proc
-import text_reco.models.craft.file_utils as file_utils
 from text_reco.models.craft.craft import CRAFT
 from text_reco.boxdetect.box_detection import BoxDetect
 from text_reco.models.crnn.crnn_run import CRNNReader
@@ -14,17 +13,11 @@ from PIL import Image
 import cv2 
 from skimage import io 
 import numpy as np 
-import text_reco.models.craft.craft_utils as craft_utils
-import text_reco.models.craft.imgproc  as imgproc
-import text_reco.models.craft.file_utils  as file_utils
 from text_reco.models.craft.imgproc import ImageConvert
 import json 
 import zipfile
 from collections import OrderedDict
 from skimage import io
-from text_reco.models.craft.craft import CRAFT
-from text_reco.boxdetect.box_detection import BoxDetect
-
 from skimage.transform import rescale, resize, downscale_local_mean
 
 class CraftReader(ImageConvert):

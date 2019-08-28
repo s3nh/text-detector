@@ -12,7 +12,6 @@ from PIL import Image
 import numpy as np
 
 class lmdbDataset(Dataset):
-
     def __init__(self, root=None, transform=None, target_transform=None):
         self.env = lmdb.open(
             root,
@@ -65,7 +64,7 @@ class resizeNormalize(object):
         self.toTensor = transforms.ToTensor()
 
     def __call__(self, img):
-        img = img.resize(self.size, self.interpolation)
+        img = img.resize(self.size , self.interpolation)
         img = self.toTensor(img)
         img.sub_(0.5).div_(0.5)
         return img

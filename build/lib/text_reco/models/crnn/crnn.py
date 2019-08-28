@@ -47,7 +47,6 @@ class CRNN(nn.Module):
         cnn.add_module('pooling{0}'.format(3),
                        nn.MaxPool2d((2, 2), (2, 1), (0, 1)))  # 512x2x16
         convRelu(6, True)  # 512x1x16
-
         self.cnn = cnn
         self.rnn = nn.Sequential(
             BidirectionalLSTM(512, nh, nh),
@@ -61,4 +60,3 @@ class CRNN(nn.Module):
         conv = conv.permute(2, 0, 1)  # [w, b, c]
         output = self.rnn(conv)
         return output
-
