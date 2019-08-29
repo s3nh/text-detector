@@ -92,3 +92,8 @@ Output - file with predicted words  on input file
 Image -> CRAFT -> CRNN -> .json
 
 ```
+
+
+#### UPDATE 
+
+added simple flask app.
