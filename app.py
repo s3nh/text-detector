@@ -5,6 +5,8 @@ from torch.autograd import Variable
 from PIL import Image
 import skimage
 import argparse
+import matplotlib.pyplot as plt
+
 
 import flask 
 from flask import Flask, request, render_template 
@@ -39,11 +41,10 @@ def index():
 @app.route('/predict', methods=['POST'])
 def make_prediction():
     if request.method=='POST':
-        file=request.files['image']
-        file.save('static/image.jpg')
-        if not file:
+        file_=request.files['image']
+        if not file_:
             return render_template('index.html', label = "No file")
-        crr = CraftReader(file)
+        crr = CraftReader(file_)
         boxes, img_res = crr.boxes_detect()
         results = {}
         for _, tmp_box in enumerate(boxes):

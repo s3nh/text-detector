@@ -64,27 +64,3 @@ class CraftReader(ImageConvert):
         boxes = craft_utils.adjustResultCoordinates(boxes, ratio_w, ratio_h)
         return boxes, img_resized 
 
-
-def main():
-    crnn = CRNNReader('data/test.png')
-    crr =  CraftReader('data/test.png')
-    boxes, img_res = crr.boxes_detect()
-    cv2.imwrite('data/resized.png', img_res)
-    tmp_dict = dict()
-    for (_, tmp_box)  in enumerate(boxes):
-        print(tmp_box)
-        x = int(tmp_box[0][0])
-        y = int(tmp_box[0][1])
-        w = int(np.abs(tmp_box[0][0] - tmp_box[1][0]))
-        h = int(np.abs(tmp_box[0][1] - tmp_box[2][1]))
-        tmp_img = img_res[y-2 :y+h+2, x-2:x+w+2]
-        cv2.imwrite('data/{}_box.png'.format(_), tmp_img)	
-        #image_ = tmp_img.copy()
-        image_ = Image.open('data/{}_box.png'.format(_)).convert('L')
-        image_ = crnn.transformer(image_)
-        image_ = image_.view(1, *image_.size())
-        image_ = Variable(image_)
-        print(image_)
-        print(crnn.get_predictions(image_))
-if __name__ == "__main__":
-    main()
