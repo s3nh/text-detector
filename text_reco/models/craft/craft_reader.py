@@ -25,7 +25,7 @@ class CraftReader(ImageConvert):
         super(CraftReader, self).__init__(image)
         self.model_path = 'text_reco/models/craft/pretrain/craft_mlt_25k.pth'
         self.net = CRAFT()
-        self.net.load_state_dict(self.copyStateDict(torch.load(self.model_path)))
+        self.net.load_state_dict(self.copyStateDict(torch.load(self.model_path, map_location='cpu')))
         self.net.eval()
         self.mag_ratio = 1
         self.square_size = 1280

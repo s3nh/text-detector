@@ -1,7 +1,6 @@
 import numpy as np 
 from skimage import io 
-import cv2 
-
+import cv2
 class ImageConvert():
     def __init__(self, img_array, interpolation =cv2.INTER_LINEAR ,  square_size = 1280,  mag_ratio=1):
         self.image = io.imread(img_array)

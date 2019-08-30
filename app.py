@@ -5,13 +5,11 @@ from torch.autograd import Variable
 from PIL import Image
 import skimage
 import argparse
-import matplotlib.pyplot as plt
 
 
 import flask 
 from flask import Flask, request, render_template 
 
-import cv2
 from skimage import io 
 import numpy as np 
 import json 

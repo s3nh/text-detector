@@ -2,9 +2,8 @@
 https://raw.githubusercontent.com/clovaai/CRAFT-pytorch/master/craft_utils.py
 """
 import numpy as np
-import cv2
 import math
-
+import cv2
 def getDetBoxes_core(textmap, linkmap, text_threshold, link_threshold, low_text):
     linkmap = linkmap.copy()
     textmap = textmap.copy()
