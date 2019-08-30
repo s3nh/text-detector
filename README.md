@@ -50,50 +50,56 @@ return .json file with
 
 ``` 
 
-and wil save it in default path. 
+#### Usage
 
-### Installing 
+You can clone this repository, 
+set up your own virtual environment by 
+
+``` 
+
+python - m venv venv
+
+```
+
+Activate it by 
 
 
-python setup.py install 
+```
+source venv/Scripts/activate
+```
 
-## Deployment
+Install requirements using ``` pip```
 
-to do : 
 
-add docker/flask/redis to store and visualize results
+``` 
+python -m pip install -r requirements.txt
+```
+
+and run ``` app.py ``` 
+
+```
+
+python app.py 
+
+```
+
+then go to 
+
+
+```localhost:8000``` 
+
+and test it. 
+
+
+### 
+I decided to put it on simplest flask module only 
+to show it's basic functionality. 
+
+
+
 
 ### To dos
 
 
-Flask app
-Bootstrap frontend 
+add frontend and some fancy vis. 
 
-docker compose 
-
-
-onxx it and put on mobile.
-how to make it faster? (todo)
-
-
-## Versioning
-0.1a
-
-## Authors
-
-
-## Acknowledments 
-
-Input image (TODO: Preprocess origin format)
-Output - file with predicted words  on input file
-
-
-```python
-Image -> CRAFT -> CRNN -> .json
-
-```
-
-
-#### UPDATE 
-
-added simple flask app.
