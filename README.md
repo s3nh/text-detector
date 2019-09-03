@@ -57,7 +57,7 @@ set up your own virtual environment by
 
 ``` 
 
-python - m venv venv
+python -m venv venv
 
 ```
 
