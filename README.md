@@ -20,7 +20,7 @@ and check argparsers. at the moment it is only input image so
 ```
 
 
-![screen](./img/front_.PNG)
+![screen](img/front_.PNG?raw=True)
 
 
 ``` 
