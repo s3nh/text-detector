@@ -4,5 +4,4 @@ data/
 *.swo
 *.pth
 *.pkl
-*.png
 *.jpeg
