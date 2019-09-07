@@ -1,0 +1,466 @@
+body {
+  font-family: sans-serif;
+  background-color: #eeeeee;
+}
+
+.file-upload {
+  background-color: #ffffff;
+  width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.file-upload-btn {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  background: #1FB264;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #15824B;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.file-upload-btn:hover {
+  background: #AB8B6A
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.file-upload-btn:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+.file-upload-content {
+  display: none;
+  text-align: center;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  margin-top: 20px;
+  border: 4px dashed #1FB264;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: #1FB264;
+  border: 4px dashed #ffffff;
+}
+
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  text-align: center;
+}
+
+.drag-text h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #15824B;
+  padding: 60px 0;
+}
+
+.file-upload-image {
+  max-height: 200px;
+  max-width: 200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.remove-image {
+  width: 200px;
+  margin: 0;
+  color: #fff;
+  background: #cd4535;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #b02818;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.remove-image:hover {
+  background: #c13b2a;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.remove-image:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+.typewriter {
+    font-size: 24px;
+    font-family: "Courier";
+ }
+
+.container {
+  width: 400px;
+  border: 1px solid;
+  padding: 20px;
+  margin: auto;
+}
+
+.icon-button {
+	background-color: white;
+	border-radius: 2.6rem;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1.3rem;
+	height: 2.6rem;
+	line-height: 2.6rem;
+	margin: 0 5px;
+	position: relative;
+	text-align: center;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	width: 2.6rem;
+}
+
+/* Circle */
+.icon-button span {
+	border-radius: 0;
+	display: block;
+	height: 0;
+	left: 50%;
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	-webkit-transition: all 0.3s;
+	   -moz-transition: all 0.3s;
+	     -o-transition: all 0.3s;
+	        transition: all 0.3s;
+	width: 0;
+}
+.icon-button:hover span {
+	width: 2.6rem;
+	height: 2.6rem;
+	border-radius: 2.6rem;
+	margin: -1.3rem;
+}
+
+/* Icons */
+.icon-button i {
+	background: none;
+	color: white;
+	height: 2.6rem;
+	left: 0;
+	line-height: 2.6rem;
+	position: absolute;
+	top: 0;
+	-webkit-transition: all 0.3s;
+	   -moz-transition: all 0.3s;
+	     -o-transition: all 0.3s;
+	        transition: all 0.3s;
+	width: 2.6rem;
+	z-index: 10;
+}
+
+
+
+
+@import url('//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css');
+
+.button-wrap {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  display: inline-block;
+  margin: 25px 50px 0;
+  cursor: pointer;
+  border-radius: 100%;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
+  
+  &.facebook {
+    background-color: #3B5998;
+    i.active { color: #3B5998; }
+  }
+  
+  &.twitter {
+    background-color: #0AC;
+    i.active { color: #0AC; }
+  }
+  
+  &.pinterest {
+    background-color: #CD2129;
+    i.active { color: #CD2129; }
+  }
+  
+  &.dribbble {
+    background-color: #F26798;
+    i.active { color: #F26798; }
+  }
+  
+  &:hover {
+    .button-inner-wrap {
+      width: 115px;
+      height: 115px;
+      
+      i.inactive { transform: translate(100px, -50%); }
+      i.active { transform: translate(-50%, -50%); }
+    }
+  }
+}
+
+.button-inner-wrap {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #DDD;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  overflow: hidden;
+  background-color: #FFF;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  
+  i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 50px;
+    transition: all 0.3s ease;
+    
+    &.inactive {
+      color: #CCC;
+      transform: translate(-50%, -50%);
+    }
+    
+    &.active { transform: translate(-150px, -50%); }
+  }
+}
+
+
+/* Wrapper */
+.icon-button {
+	background-color: white;
+	border-radius: 2.6rem;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1.3rem;
+	height: 2.6rem;
+	line-height: 2.6rem;
+	margin: 0 5px;
+	position: relative;
+	text-align: center;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	width: 2.6rem;
+}
+
+/* Circle */
+.icon-button span {
+	border-radius: 0;
+	display: block;
+	height: 0;
+	left: 50%;
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	-webkit-transition: all 0.3s;
+	   -moz-transition: all 0.3s;
+	     -o-transition: all 0.3s;
+	        transition: all 0.3s;
+	width: 0;
+}
+.icon-button:hover span {
+	width: 2.6rem;
+	height: 2.6rem;
+	border-radius: 2.6rem;
+	margin: -1.3rem;
+}
+
+/* Icons */
+.icon-button i {
+	background: none;
+	color: white;
+	height: 2.6rem;
+	left: 0;
+	line-height: 2.6rem;
+	position: absolute;
+	top: 0;
+	-webkit-transition: all 0.3s;
+	   -moz-transition: all 0.3s;
+	     -o-transition: all 0.3s;
+	        transition: all 0.3s;
+	width: 2.6rem;
+	z-index: 10;
+}
+
+
+
+$colors: (
+    background: #1d1f20,
+    text: #eee
+);
+
+$font: (
+    family: sans-serif,
+    size: 24px,
+    letter-spacing: 0
+);
+
+$config: (
+    animated: false,
+    nb-letters: 16,
+    animation-length: 4s,
+    mask-letters: ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
+);
+
+// ----------------------------------
+
+@function color($value) {
+    @return map-get($colors, $value);
+}
+
+@function font($value) {
+    @return map-get($font, $value);
+}
+
+@function config($value) {
+    @return map-get($config, $value);
+}
+
+@function random-string($list) {
+    $result: null;
+    @for $i from 1 through length($list) {
+        $random: random(length($list));
+        $current: nth($list, $random);
+        $list: remove-nth($list, $random);
+        $result: $result#{$current};
+    }
+    @return $result;
+}
+
+@function remove-nth($list, $index) {
+    $result: ();
+    @for $i from 1 through length($list) {
+        @if $i != $index {
+            $result: append($result, nth($list, $i));
+        }
+    }
+    @return $result;
+}
+
+@mixin respond-to($breakpoint) {
+    @if type-of($breakpoint) == list {
+        @media (min-width: nth($breakpoint, 1)) and (max-width: nth($breakpoint, 2)) {
+            @content;
+        }
+    }
+    @else {
+        @media (max-width: $breakpoint) {
+            @content;
+        }
+    }
+}
+
+// ----------------------------------
+
+body {
+    text-align: center;
+    background-color: color(background);
+}
+
+.wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    font-size: 0;
+    transform: translate(-50%);
+}
+
+p {
+    font-family: font(family);
+    font-size: 14px;
+    font-weight: 500;
+    color: color(text);
+    opacity: 0.3;
+}
+
+.letter {
+    width: font(size);
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    margin: 0 ceil(font(letter-spacing) / 2);
+    font-family: font(family);
+    font-size: font(size);
+    font-weight: 600;
+    line-height: font(size);
+    text-transform: uppercase;
+    color: color(text);
+    @include respond-to(625px) {
+        //font-size: 16px;
+        //width: 18px;
+    }
+    &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        word-break: break-all;
+        background-color: color(background);
+    }
+}
+
+// ----------------------------------
+
+@for $i from 1 through config(nb-letters) {
+    $length: length(config(mask-letters));
+    $random: random($length);
+    $steps: $random - 1;
+    $offset: font(size) * $steps * -1;
+    $delay: random(100) / 100;
+      $duration: $steps * (config(animation-length) / $random);
+    .letter:nth-child(#{$i}):before {
+        content: quote(random-string(config(mask-letters)));
+        margin-top: $offset;
+        animation-name: letter#{$i};
+        animation-duration: $duration - ($duration * $delay);
+        animation-delay: $delay * 1s;
+        animation-fill-mode: forwards;
+    }
+    @keyframes letter#{$i} {
+        from {
+            margin-top: $offset;
+        }
+        to {
+            margin-top: font(size);
+        }
+    }
+}
+}

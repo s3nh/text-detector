@@ -56,7 +56,7 @@ def make_prediction():
             tmp_img = tmp_img.view(1, *tmp_img.size())
             tmp_img = Variable(tmp_img)
             results['{}'.format(_)] = crnn.get_predictions(tmp_img)
-        return render_template('index.html', file_url = 'static/image.jpg',label = results)
+        return render_template('index.html', label = results)
 
 if __name__ == "__main__":
     crnn=CRNNReader()

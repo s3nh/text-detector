@@ -1,20 +1,144 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  
+  <title>Pytorch - Text recognition tool 
+
+  </title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename = 'vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename = 'dist/style.css')}}">
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename = 'css/scrolling-nav.css')}}" rel="stylesheet">
+  <link rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'>
+  <link rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css'>
+
+</head>
+
+<body id="page-top">
+ <link rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'>
+<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css'>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      
+	    <div class="text-center" style="color:black">
+    <a href = "https://www.github.com/s3nh"><i class="fa fa-github fa-4x icon-3d" style="color:white"></i>  </a>
+    <a href = "https://linkedin.com/in/s3nh"><i class="fa fa-linkedin fa-4x icon-3d" style="color:white"></i>  </a>
+	  <a class="navbar-brand js-scroll-trigger" a href="https://s3nh.github.io">My Page
+  </div>
+	  </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Pytorch Text Recognition Tool</h1>
+      <p class="lead">Craft and CRNN based tool.</p>
+	
+    </div>
+  </header>
 
 
-    <head>
+  <section id="services" >
+  
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<form action ="/predict" method = "post" enctype = "multipart/form-data">
+	<div class="file-upload">
+  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image from file</button>
+
+  <div class="image-upload-wrap">
+    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" name="image" />
+    <div class="drag-text">
+      <h3>Drag an image</h3>
+    </div>
+  </div>
+  <div class="file-upload-content">
+    <img class="file-upload-image" src="#" alt="your image"/>
+    <div class="image-title-wrap">
+      <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+    </div>
+  </div>
+</div>
+<div class= "text-center">
+<button type="submit" class="btn btn-primary btn-lg " value ="Predict">Get your results</button>
+<p>	{% if label %} {{ label }} {% endif %} </p>
+ </div>
 
 
-        <title>CRNN + CRAFT Model  as Flask API </title>
-        <meta charset='utf-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1'>
-    </head>
-    <body>
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 mx-auto">
+          <h2>Project description</h2>
+          <p class="lead">Two pretrained neural networks are responsible for detect boxes with text and then recognize word in each of the boxes. It allows to put some complex/high-resolution documents and gather information from it.</p>
+          <ul>
+            <li>I decided to beautify this project with some template</li>
+            <li>CRAFT Paper </li>
+            <li>CRNN Paper</li>
+            <li>Example </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
+</form>
+</body>
+<!-- partial --> 
+  <script  src="{{ url_for('static', filename = 'src/script.js')}}"></script>
+  </section>
 
-         <h1>Text Scene recognition </h1>
-         <form action ="/predict" method = "post" enctype = "multipart/form-data">
-             <input type = "file" name = "image" value = "Upload">
-             <input type = "submit" value="Predict">{% if label %} {{ label }} {% endif %}
-         </form>
-     </body>
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Drop me a line</h2>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Add font awesome icons -->
+<!-- partial -->
+		  </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; </p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename = 'vendor/jquery/jquery.min.js')}} "></script>
+  <script src="{{ url_for('static', filename = 'vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{{ url_for('static', filename = 'vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="{{ url_for('static', filename = 'js/scrolling-nav.js')}}"></script>
+
+</body>
+
 </html>
