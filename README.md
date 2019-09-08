@@ -1,9 +1,3 @@
-Deployed in here, 
-
-[Link](https://glacial-ravine-89423.herokuapp.com/)
-
-but It will exceed an memory error on prediciton, so I'll push it to ews instance. 
-
 ![travis build](https://api.travis-ci.com/s3nh/pytorch-text-recognition.svg?branch=master)
 
 ### Text detection and recognition
