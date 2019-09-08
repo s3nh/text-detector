@@ -9,7 +9,7 @@ lmdb==0.97
 MarkupSafe==1.1.1
 networkx==2.3
 numpy==1.17.1
-opencv-contrib-python
+opencv-python
 Pillow==6.1.0
 PyWavelets==1.0.3
 scikit-image==0.15.0
