@@ -2,6 +2,4 @@
 data/
 *.swp
 *.swo
-*.pth
-*.pkl
 *.jpeg
