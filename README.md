@@ -99,6 +99,8 @@ I test it on cuda and it was much faster.
 If you have more information, drop me a line
 If you like it, give a star 
 
+Draft: Show how does it work on complex .tif example document.
+
 [Contact Info](https://s3nh.github.io)
 
 
